@@ -27,9 +27,9 @@
 
       "columns": [
         {"name": "id", "type": "serial", "properties": {"nullable":false,"primary_key":true,"auto_increment":true}},
-        {"name": "source", "type": "string,", "properties": {}},
-        {"name": "valid_to", "type": "datetime,", "properties": {}},
-        {"name": "latitude", "type": "float,", "properties": {}},
+        {"name": "source", "type": "string", "properties": {}},
+        {"name": "valid_to", "type": "datetime", "properties": {}},
+        {"name": "latitude", "type": "float", "properties": {}},
         {"name": "longitude", "type": "float", "properties": {}},
         {"name": "created_at", "type": "datetime", "properties": {}},
         {"name": "updated_at", "type": "datetime", "properties": {}}

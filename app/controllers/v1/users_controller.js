@@ -5,6 +5,7 @@ module.exports = (function() {
   const Nodal = require('nodal');
   const User = Nodal.require('app/models/user.js');
   const UserProfile = Nodal.require('app/models/user_profile.js');
+  const location = Nodal.require('app/models/location.js');
   const AuthController = Nodal.require('app/controllers/auth_controller.js');
 
   class V1UsersController extends AuthController {
@@ -15,6 +16,7 @@ module.exports = (function() {
 
         UserProfile.query()
           .join('user')
+          .join('location')
           .where(this.params.query)
           .end((err, models) => {
 

@@ -15,9 +15,9 @@ module.exports = (function() {
 
       return [
         this.createTable("locations", [
-          {"name":"source","type":"string,"},
-          {"name":"valid_to","type":"datetime,"},
-          {"name":"latitude","type":"float,"},
+          {"name":"source","type":"string"},
+          {"name":"valid_to","type":"datetime"},
+          {"name":"latitude","type":"float"},
           {"name":"longitude","type":"float"}
         ])
       ];
