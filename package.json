@@ -1,0 +1,24 @@
+{
+  "name": "climbing-parter",
+  "version": "0.0.0",
+  "description": "climbing-parter",
+  "author": "Chris Barnard",
+  "main": "server.js",
+  "engines": {
+    "node": "4.2.4"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "nodal": "0.6.1"
+  },
+  "devDependencies": {
+    "chai": "~3.4.1",
+    "mocha": "~2.3.4"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test mocha ./test/runner.js",
+    "start": "node server.js --harmony",
+    "worker": "node worker.js --harmony"
+  },
+  "private": true
+}
