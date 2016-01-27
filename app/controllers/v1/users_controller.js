@@ -4,18 +4,24 @@ module.exports = (function() {
 
   const Nodal = require('nodal');
   const User = Nodal.require('app/models/user.js');
+  const AuthController = Nodal.require('app/controllers/auth_controller.js');
 
-  class V1UsersController extends Nodal.Controller {
+  class V1UsersController extends AuthController {
 
     index() {
 
-      User.query()
-        .where(this.params.query)
-        .end((err, models) => {
+      this.authorize((accessToken, user) => {
 
-          this.respond(err || models);
+        User.query()
+          .where(this.params.query)
+          .end((err, models) => {
 
-        });
+            this.respond(err || models);
+
+          });
+        
+      });
+
 
     }
 
