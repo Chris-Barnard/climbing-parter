@@ -13,6 +13,7 @@ module.exports = (function() {
 
   const V1UsersController = Nodal.require('app/controllers/v1/users_controller.js');
   const V1AccessTokensController = Nodal.require('app/controllers/v1/access_tokens_controller.js');
+  const V1UserProfilesController = Nodal.require('app/controllers/v1/user_profiles_controller.js');
 
   /* generator: end imports */
 
@@ -23,6 +24,7 @@ module.exports = (function() {
 
   router.route('/v1/users/:id', V1UsersController);
   router.route('/v1/access_tokens/:id', V1AccessTokensController);
+  router.route('/v1/user_profiles/:id', V1UserProfilesController);
 
   /* generator: end routes */
 

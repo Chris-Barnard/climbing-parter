@@ -1,6 +1,6 @@
 {
 
-  "migration_id": 2016012713495203,
+  "migration_id": 2016012715550036,
 
   "models": {
 
@@ -21,6 +21,22 @@
 
     },
 
+    "Location": {
+
+      "table": "locations",
+
+      "columns": [
+        {"name": "id", "type": "serial", "properties": {"nullable":false,"primary_key":true,"auto_increment":true}},
+        {"name": "source", "type": "string,", "properties": {}},
+        {"name": "valid_to", "type": "datetime,", "properties": {}},
+        {"name": "latitude", "type": "float,", "properties": {}},
+        {"name": "longitude", "type": "float", "properties": {}},
+        {"name": "created_at", "type": "datetime", "properties": {}},
+        {"name": "updated_at", "type": "datetime", "properties": {}}
+      ]
+
+    },
+
     "User": {
 
       "table": "users",
@@ -30,6 +46,23 @@
         {"name": "email", "type": "string", "properties": {"unique":true}},
         {"name": "password", "type": "string", "properties": {}},
         {"name": "username", "type": "string", "properties": {}},
+        {"name": "created_at", "type": "datetime", "properties": {}},
+        {"name": "updated_at", "type": "datetime", "properties": {}}
+      ]
+
+    },
+
+    "UserProfile": {
+
+      "table": "user_profiles",
+
+      "columns": [
+        {"name": "id", "type": "serial", "properties": {"nullable":false,"primary_key":true,"auto_increment":true}},
+        {"name": "user_id", "type": "int", "properties": {}},
+        {"name": "name", "type": "string", "properties": {}},
+        {"name": "picture_url", "type": "string", "properties": {}},
+        {"name": "flags", "type": "json", "properties": {}},
+        {"name": "current_location", "type": "int", "properties": {}},
         {"name": "created_at", "type": "datetime", "properties": {}},
         {"name": "updated_at", "type": "datetime", "properties": {}}
       ]

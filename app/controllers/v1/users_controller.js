@@ -4,6 +4,7 @@ module.exports = (function() {
 
   const Nodal = require('nodal');
   const User = Nodal.require('app/models/user.js');
+  const UserProfile = Nodal.require('app/models/user_profile.js');
   const AuthController = Nodal.require('app/controllers/auth_controller.js');
 
   class V1UsersController extends AuthController {
@@ -12,7 +13,8 @@ module.exports = (function() {
 
       this.authorize((accessToken, user) => {
 
-        User.query()
+        UserProfile.query()
+          .join('user')
           .where(this.params.query)
           .end((err, models) => {
 
@@ -37,9 +39,29 @@ module.exports = (function() {
 
     create() {
 
-      User.create(this.params.body.data, (err, model) => {
+      // create the new user entry
+      User.create(this.params.body.data, (err, newUser) => {
 
-        this.respond(err || model);
+        if (err) { this.respond(err); }
+        else {
+
+          // create a corresponding new user profile
+
+          // setup defaults
+          var newProfile = {};
+          newProfile.flags = {};
+          newProfile.user_id = newUser.get('id');
+          newProfile.flags.avail_for_search = true;
+
+          // and create new user profile
+          UserProfile.create(newProfile, (err, newProfile) => {
+
+            // respond with the newly created user
+            this.respond(err || newUser);
+
+          });
+
+        }
 
       });
 
