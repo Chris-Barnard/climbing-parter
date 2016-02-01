@@ -4,8 +4,10 @@ module.exports = (function() {
 
   const Nodal = require('nodal');
   const UserProfile = Nodal.require('app/models/user_profile.js');
+  const Location = Nodal.require('app/models/location.js');
+  const AuthController = Nodal.require('app/controllers/auth_controller.js');
 
-  class V1UserProfilesController extends Nodal.Controller {
+  class V1UserProfilesController extends AuthController {
 
     index() {
 
@@ -21,9 +23,56 @@ module.exports = (function() {
 
     show() {
 
-      UserProfile.find(this.params.route.id, (err, model) => {
+      var distanceToTarget;
 
-        this.respond(err || model);
+      // custom function to compare locations
+      this.authorize((accessToken, user) => {
+
+        UserProfile.find(this.params.route.id, (err, targetProfile) => {
+
+          if (err) { this.respond(err); }
+          if (!targetProfile) { this.respond(new Error('No matching user profile at id : ' + this.params.route.id)); }
+
+          UserProfile.query()
+            .join('location')
+            .where( { user_id : user.get('id') } )
+            .end((err, myProfiles) => {
+
+              if (err) { this.respond(err); }
+              if (!myProfiles) { this.respond(new Error('No matching user profile for user_id : ' + user.get('id'))); }
+
+              Location.queryDistance(myProfiles[0].get('current_location'), targetProfile.get('current_location'), (err, result) => {
+
+                if (err) { this.respond(err); };
+
+                // convert results into JSON object
+                let resultObject = JSON.parse(result);
+
+                if (resultObject.status === 'ZERO_RESULTS') {
+
+                  distanceToTarget = null;
+
+                }
+
+                if (resultObject.status === 'OK') {
+
+                  distanceToTarget = resultObject.routes[0].legs[0].distance.text;
+
+                }
+
+                // convert targetProfile model into a basic object
+                let targetProfileObject = targetProfile._data;
+                targetProfileObject.distance_to_me = distanceToTarget;
+
+                this.respond(err || targetProfileObject);
+
+              });
+
+              // this.respond(err || models);
+
+            });
+
+        });
 
       });
 
