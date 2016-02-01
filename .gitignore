@@ -1,5 +1,7 @@
 #Don't include installed node_modules
 node_modules
-#Don't include secrets.json
-config/secrets.json
+#Don't include config direcetory
 config
+#config/secrets.json
+#secrets.json
+#config
