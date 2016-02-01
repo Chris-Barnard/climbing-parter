@@ -2,3 +2,4 @@
 node_modules
 #Don't include secrets.json
 config/secrets.json
+config
