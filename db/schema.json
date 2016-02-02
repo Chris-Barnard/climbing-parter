@@ -1,6 +1,6 @@
 {
 
-  "migration_id": 2016012715550036,
+  "migration_id": 2016020218080387,
 
   "models": {
 
@@ -64,7 +64,9 @@
         {"name": "flags", "type": "json", "properties": {}},
         {"name": "current_location", "type": "int", "properties": {}},
         {"name": "created_at", "type": "datetime", "properties": {}},
-        {"name": "updated_at", "type": "datetime", "properties": {}}
+        {"name": "updated_at", "type": "datetime", "properties": {}},
+        {"name": "gear", "type": "json", "properties": {}},
+        {"name": "preferred_styles", "type": "json", "properties": {}}
       ]
 
     }

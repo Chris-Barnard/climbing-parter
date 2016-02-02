@@ -90,7 +90,9 @@ module.exports = (function() {
 
     update() {
 
+      console.log('this.params.body.data : ' + JSON.stringify(this.params.body.data, null, 2));
       UserProfile.update(this.params.route.id, this.params.body.data, (err, model) => {
+
 
         this.respond(err || model);
 
